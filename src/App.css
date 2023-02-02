@@ -1,0 +1,20 @@
+.m{
+    border: 2px solid red;
+}
+.n{
+    border: 2px solid greenyellow;
+}
+*{
+    font-family: 'Montserrat', sans-serif;
+}
+#parent::before{
+content: '';
+height: 100%;
+width: 100%;
+position: absolute;
+background-image: url('https://cdn.pixabay.com/photo/2016/11/14/22/18/beach-1824855_960_720.jpg');
+background-size: cover;
+background-position: center;
+z-index: -1;
+/* filter: brightness(20%); */
+}
