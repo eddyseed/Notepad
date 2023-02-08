@@ -1,30 +1,19 @@
 import React, { Component } from 'react'
-
+import Editor from './Editor'
+import MainMenu from './MainMenu'
+import './style.css'
+// const content = document.getElementById("mainMenu").innerHTML
 export default class TArea extends Component {
+  toggleMenu = () => {
+    let menu = document.getElementById("mainMenu")
+    if (menu.classList.contains("flex")) { menu.classList.remove('flex'); menu.classList.add('hidden') } else { menu.classList.remove('hidden'); menu.classList.add('flex'); }
+  }
   render() {
     return (
-      <section className='flex items-center h-screen justify-center'>
-        <div className={`grid h-[${this.props.height}] w-4/5`} style={{
-          gridTemplateRows: "1fr 6fr"
-        }}>
-          <section className={`bg-[#381d2a] rounded-tl-xl rounded-tr-xl`}>
-            <section className="text-2xl h-full flex items-center space-x-6 px-6 rounded-tl-xl rounded-tr-xl bg-[#000000a0] text-white" id='toolbar-wrapper'>
-              <span><i className="fa-solid fa-bars"></i></span>
-              <span><i className="fa-solid fa-scissors"></i></span>
-              <span><i className="fa-regular fa-copy"></i></span>
-              <span><i className="fa-solid fa-paste"></i></span>
-              <span><i className="fa-solid fa-check"></i></span>
-              <span><i className="fa-solid fa-pipe"></i></span>
-              <span><i className="fa-solid fa-magnifying-glass"></i></span>
-              <span><i className="fa-regular fa-star"></i></span>
-              <span><i className="fa-solid fa-code"></i></span>
-            </section>
-          </section>
-          <section>
-            <textarea className={`h-full w-full outline-none px-4 py-4 resize-none rounded-br-xl rounded-bl-xl`} placeholder='Type something boi...'></textarea>
-          </section>
-        </div>
-      </section>
+      <>
+        <MainMenu background={this.props.primaryColor} trigger={this.toggleMenu} />
+        <Editor height={this.props.height} background={this.props.primaryColor} trigger={this.toggleMenu} />
+      </>
     )
   }
 }
