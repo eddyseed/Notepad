@@ -1,0 +1,14 @@
+main#parent_wrapper{
+    height: 100vh;
+    &>section{
+        // width: 90%;
+        height: 90%;
+        grid-template-rows: 1fr 5fr;
+    }
+}
+.m{
+    border: 2px solid red;
+}
+.n{
+    border: 2px solid greenyellow;
+}

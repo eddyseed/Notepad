@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 
-export default class strd extends Component {
+export default class TextField extends Component {
   render() {
     return (
-      <div>strd</div>
+      <div>TextField</div>
     )
   }
 }

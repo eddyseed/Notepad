@@ -1,9 +1,15 @@
-.m{
-    border: 2px solid red;
+main#parent_wrapper {
+  height: 100vh;
 }
-.n{
-    border: 2px solid greenyellow;
+main#parent_wrapper > section {
+  height: 90%;
+  grid-template-rows: 1fr 5fr;
 }
-*{
-    font-family: 'Montserrat', sans-serif;
+
+.m {
+  border: 2px solid red;
 }
+
+.n {
+  border: 2px solid greenyellow;
+}/*# sourceMappingURL=App.css.map */
