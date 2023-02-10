@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import jQuery from 'jquery'
-import $ from 'jquery'
 export default class Toolbar extends Component {
   execCutCommand = () => {
     document.execCommand('cut')
