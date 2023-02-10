@@ -1,0 +1,10 @@
+.menu-items {
+    &>li {
+        padding: .5rem 1rem;
+        border-radius: 5px;
+
+        &:hover {
+            background-color: #A7E7A5;
+        }
+    }
+}
