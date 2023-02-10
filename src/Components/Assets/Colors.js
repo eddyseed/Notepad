@@ -3,5 +3,7 @@ export const colorPalette = {
     "Cal Poly green": "14591d",
     "Tea green": "bfffbc",
     "Uranian Blue": "acd2ed",
-    "White": "fff"
+    "White": "fff",
+    "Licorice brown": "170905",
+    "Smoky black": "080302"
 }

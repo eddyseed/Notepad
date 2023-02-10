@@ -8,8 +8,8 @@ export default class App extends Component {
     return (
       <main id='parent_wrapper'>
         <section className='grid'>
-          <Toolbar backgroundColor={colorPalette['Dark green']} foregroundColor={colorPalette.White}/>
-          <TextField />
+          <Toolbar backgroundColor={colorPalette['Smoky black']} foregroundColor={colorPalette.White}/>
+          <TextField backgroundColor={colorPalette['Smoky black']}/>
         </section>
       </main>
     )
