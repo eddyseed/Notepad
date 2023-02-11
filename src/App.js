@@ -6,10 +6,10 @@ import './App.css'
 export default class App extends Component {
   render() {
     return (
-      <main id='parent_wrapper'>
+      <main id='parent_wrapper' style={{height:"100vh"}}>
         <section className='grid'>
-          <Toolbar backgroundColor={colorPalette['Tea green']} foregroundColor={colorPalette['Dark green']}/>
-          <TextField backgroundColor={colorPalette['']} foregroundColor={colorPalette['Dark green']}/>
+          <Toolbar backgroundColor={colorPalette['Dark green']} foregroundColor={colorPalette['Tea green']}/>
+          <TextField backgroundColor={colorPalette['Smoky black']} foregroundColor={colorPalette['Dark green']}/>
         </section>
       </main>
     )
