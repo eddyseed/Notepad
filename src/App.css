@@ -17,4 +17,9 @@ main#parent_wrapper > section {
 
 .n {
   border: 2px solid greenyellow;
+}
+
+.btn {
+  background: #bfffbc;
+  color: #080302;
 }/*# sourceMappingURL=App.css.map */

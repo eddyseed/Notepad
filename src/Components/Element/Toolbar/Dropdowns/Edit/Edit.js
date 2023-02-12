@@ -25,6 +25,9 @@ export default class Edit extends Component {
         let text = String(date.getDate()+"th of "+month[date.getMonth()])
         document.getElementById('textfield').value += text
     }
+    featureNotWorking=()=>{
+        alert("Find and Replace features are not working yet!")
+    }
     render() {
         return (
             <div className={`bg-[#080302] text-[#bfffbc] absolute space-y-4 py-2 top-12 left-36 hidden`} style={{ borderRadius: "10px" }} id='editDropDown'>
@@ -38,8 +41,8 @@ export default class Edit extends Component {
                 <ul> <li className='flex items-center justify-center'><hr className='w-[80%]' /></li></ul>
                 <ul className='second-sector space-y-1'>
                     <ul className='space-x-4' onClick={this.execSelectAllCommand}><li><i className="fa-solid fa-align-justify"></i><span>Select All</span></li><li>Ctrl + A</li></ul>
-                    <ul className='space-x-4'><li><i className="fa-solid fa-magnifying-glass"></i><span>Find</span></li><li></li></ul>
-                    <ul className='space-x-4'><li><i className="fa-solid fa-magnifying-glass-arrow-right"></i><span>Replace</span></li><li></li></ul>
+                    <ul className='space-x-4' onClick={this.featureNotWorking}><li><i className="fa-solid fa-magnifying-glass"></i><span>Find</span></li><li></li></ul>
+                    <ul className='space-x-4' onClick={this.featureNotWorking}><li><i className="fa-solid fa-magnifying-glass-arrow-right"></i><span>Replace</span></li><li></li></ul>
                 </ul>
                 <ul> <li className='flex items-center justify-center'><hr className='w-[80%]' /></li></ul>
 

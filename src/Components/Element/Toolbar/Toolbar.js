@@ -43,7 +43,7 @@ export default class Toolbar extends Component {
 render() {
   return (
     <div className={`grid grid-rows-2 select-none border-style-x`} id='toolbar_parent'>
-      <section>
+      <section id='menubar'>
         <ul className={`fileMenu flex space-x-4 w-full px-10 items-center h-full font-[500] menu-items bg-[#${this.props.backgroundColor}] outline-none text-[#${this.props.foregroundColor}]`}>
           <li className='cursor-pointer' onMouseEnter={this.showFileMenu}>File&nbsp;<i className="fa-solid fa-caret-down"></i></li>
           <li className='cursor-pointer' onMouseEnter={this.editFileMenu}>Edit <i className="fa-solid fa-caret-down"></i></li>
@@ -55,7 +55,7 @@ render() {
       <File cutCommand={this.execCutCommand}/>
       <Edit />
       <Format />
-      <section className={`flex h-full items-end justify-center text-[#${this.props.foregroundColor}] bg-[#${this.props.backgroundColor}]`} onMouseEnter={this.quickToolBarClicked}>
+      <section className={`flex h-full items-end justify-center text-[#${this.props.foregroundColor}] bg-[#${this.props.backgroundColor}]`} onMouseEnter={this.quickToolBarClicked} id='quickToolBar'>
         <section className='text-2xl space-x-6 w-11/12 h-full flex items-center'>
           <button onClick={this.execCutCommand} title='Ctrl + X'><span><i className="fa-solid fa-scissors"></i></span></button>
           <button onClick={this.execCopyCommand} title='Ctrl + C'><span><i className="fa-regular fa-copy"></i></span></button>
