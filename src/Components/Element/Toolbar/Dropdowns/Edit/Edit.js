@@ -1,6 +1,15 @@
 import React, { Component } from 'react'
-
+import PropTypes from 'prop-types'
+import shortcuts from '../../../../Assets/Shortcuts'
 export default class Edit extends Component {
+    static propTypes = {
+        hidden: PropTypes.bool,
+        x: PropTypes.number,
+        y: PropTypes.number
+    }
+    static defaultProps = {
+        hidden: false
+    }
     execCutCommand = () => {
         document.execCommand('cut')
         document.getElementById('editDropDown').classList.add('hidden')
@@ -30,23 +39,23 @@ export default class Edit extends Component {
     }
     render() {
         return (
-            <div className={`bg-[#080302] text-[#bfffbc] absolute space-y-4 py-2 top-12 left-36 hidden`} style={{ borderRadius: "10px" }} id='editDropDown'>
-                <ul className='first-sector space-y-1'>
+            <div className={`space-y-4 top-${this.props.y} left-${this.props.x} ${this.props.hidden?'hidden':''}`} id={`${this.props.eID}`}>
+                <ul className='sector space-y-1'>
                     <ul className='space-x-4' onClick={this.execCutCommand}>
                         <li><i className="fa-solid fa-cut"></i><span>Cut</span></li>
-                        <li>Ctrl + X</li></ul>
-                    <ul className='space-x-4' onClick={this.execCopyCommand}><li><i className="fa-regular fa-copy"></i><span>Copy</span></li><li>Ctrl + C</li></ul>
-                    <ul className='space-x-4' onClick={this.execPasteCommand}><li><i className="fa-regular fa-paste"></i><span>Paste</span></li><li>Ctrl + V</li></ul>
+                        <li>{shortcuts.cut}</li></ul>
+                    <ul className='space-x-4' onClick={this.execCopyCommand}><li><i className="fa-regular fa-copy"></i><span>Copy</span></li><li>{shortcuts.copy}</li></ul>
+                    <ul className='space-x-4' onClick={this.execPasteCommand}><li><i className="fa-regular fa-paste"></i><span>Paste</span></li><li>{shortcuts.paste}</li></ul>
                 </ul>
                 <ul> <li className='flex items-center justify-center'><hr className='w-[80%]' /></li></ul>
-                <ul className='second-sector space-y-1'>
-                    <ul className='space-x-4' onClick={this.execSelectAllCommand}><li><i className="fa-solid fa-align-justify"></i><span>Select All</span></li><li>Ctrl + A</li></ul>
+                <ul className='sector space-y-1'>
+                    <ul className='space-x-4' onClick={this.execSelectAllCommand}><li><i className="fa-solid fa-align-justify"></i><span>Select All</span></li><li>{shortcuts.selectall}</li></ul>
                     <ul className='space-x-4' onClick={this.featureNotWorking}><li><i className="fa-solid fa-magnifying-glass"></i><span>Find</span></li><li></li></ul>
                     <ul className='space-x-4' onClick={this.featureNotWorking}><li><i className="fa-solid fa-magnifying-glass-arrow-right"></i><span>Replace</span></li><li></li></ul>
                 </ul>
                 <ul> <li className='flex items-center justify-center'><hr className='w-[80%]' /></li></ul>
 
-                <ul className='second-sector space-y-1'>
+                <ul className='sector space-y-1'>
                     <ul className='space-x-4' onClick={this.insertTimeCommand}><li><i className="fa-regular fa-clock "></i><span>Insert Time</span></li><li></li></ul>
                 </ul>
             </div>

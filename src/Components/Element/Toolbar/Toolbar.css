@@ -1,7 +1,56 @@
-.menu-items > li {
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
+@media only screen and (min-width: 768px) {
+  .menu-items > li {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  #fileDropDown,
+  #editDropDown,
+  #formatDropDown {
+    position: absolute;
+    width: 20vw;
+    background: white;
+    border-radius: 5px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+  }
 }
-.menu-items > li:hover {
-  background-color: rgba(20, 89, 29, 0.5098039216);
+.sector {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  font-weight: 500;
+}
+.sector > ul {
+  padding: 0.3rem 1rem;
+  display: grid;
+  width: 95%;
+  border-radius: 5px;
+  grid-template-columns: 5fr 3fr;
+  cursor: pointer;
+  transition: 0.1s ease-in;
+}
+.sector > ul > li:first-child {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  align-items: center;
+}
+.sector > ul > li:last-child {
+  display: flex;
+  justify-content: flex-end;
+}
+.sector > ul > i {
+  align-self: center;
+  font-size: 1.2rem;
+}
+.sector > ul:hover {
+  background-color: #0F193F;
+  color: #FBF5F3;
+}
+
+.discard-menu-option:hover {
+  background-color: #C91106 !important;
+  color: white !important;
 }/*# sourceMappingURL=Toolbar.css.map */

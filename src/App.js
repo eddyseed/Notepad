@@ -3,16 +3,16 @@ import { colorPalette } from './Components/Assets/Colors'
 import TextField from './Components/Element/TextField/TextField'
 import Toolbar from './Components/Element/Toolbar/Toolbar'
 import './App.css'
-import Nfile from './Components/Element/Toolbar/Dropdowns/File/NewFile/Nfile'
+import NewFileDialog from './Components/Element/Toolbar/Dropdowns/File/NewFile/NewFileDialog'
 export default class App extends Component {
   render() {
     return (
-      <main id='parent_wrapper' style={{height:"100vh"}}>
+      <main id='parent_wrapper' className='h-screen'>
         <section className='grid' id='mainElements'>
-          <Toolbar backgroundColor={colorPalette['Dark green']} foregroundColor={colorPalette['Tea green']}/>
-          <TextField backgroundColor={colorPalette['Smoky black']} foregroundColor={colorPalette['Dark green']}/>
+          <Toolbar hidden={false} backgroundColor={colorPalette['Blue-Black']} foregroundColor={colorPalette['Snow']} eID="toolBar"/>
+          <TextField backgroundColor={colorPalette['Snow']} foregroundColor={colorPalette['Blue-Black']} eID="textfieldWrapper"/>
         </section>
-        <Nfile backgroundColor={colorPalette['Dark green']}/>
+        <NewFileDialog backgroundColor={colorPalette['Blue-Black']} foregroundColor={colorPalette.Snow} hidden={true}/>
       </main>
     )
   }

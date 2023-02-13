@@ -1,10 +1,10 @@
-#textfield-wrapper {
+#textfieldWrapper {
   display: grid;
   grid-template-rows: 15fr 1fr;
 }
-#textfield-wrapper #textfield::-moz-selection {
+#textfieldWrapper #textfield::-moz-selection {
   background-color: #bfffbc;
 }
-#textfield-wrapper #textfield::selection {
+#textfieldWrapper #textfield::selection {
   background-color: #bfffbc;
 }/*# sourceMappingURL=TextField.css.map */
