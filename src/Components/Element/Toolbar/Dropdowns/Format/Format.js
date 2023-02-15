@@ -1,8 +1,41 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import shortcuts from '../../../../Assets/Shortcuts'
-import { setBackground } from '../../../../Assets/Colors'
+import { colorPalette, setBackground, setForeground } from '../../../../Assets/Colors'
 export default class Format extends Component {
+    componentDidMount() {
+        localStorage.setItem('darkModeEnabled', '0')
+        const EArray = [
+            'statusbar',
+            'menuBar',
+            'quickToolBar',
+        ]
+
+        const another_array = [
+            'fileDropDown',
+            'editDropDown',
+            'formatDropDown'
+        ]
+        if (localStorage.getItem('darkModeEnabled') === '0') {
+            setBackground(EArray, '000', true)
+            setBackground('textfield', '171515', false)
+            setBackground(another_array, '000', true)
+            setForeground(another_array, 'BFFFBC', true)
+            setForeground('textfield', 'BFFFBC', false)
+            another_array.forEach(element => {
+                document.getElementById(element).style.border = "1px solid rgba(255, 255, 255, 0.15)";
+            });
+        } else {
+            setBackground(EArray, colorPalette['Blue-Black'], true)
+            setBackground('textfield', 'fff', false)
+            setForeground('textfield', colorPalette['Blue-Black'], false)
+            setBackground(another_array, 'fff', true)
+            setForeground(another_array, colorPalette['Blue-Black'], true)
+            another_array.forEach(element => {
+                document.getElementById(element).style.border = "1px solid rgba(0, 0, 0, 0.15)";
+            });
+        }
+    }
     static propTypes = {
         hidden: PropTypes.bool,
         x: PropTypes.number,
@@ -20,15 +53,38 @@ export default class Format extends Component {
     }
     toggleDarkMode = () => {
         const EArray = [
-            'textfield',
-            'fileDropDown',
-            'formatDropDown',
-            'editDropDown',
             'statusbar',
-            'toolBar',
-            'menubar'
+            'menuBar',
+            'quickToolBar',
+
         ]
-        setBackground(EArray,'000',true)
+        const another_array = [
+            'fileDropDown',
+            'editDropDown',
+            'formatDropDown'
+        ]
+        if (localStorage.getItem('darkModeEnabled') === '1') {
+            console.log("Dark")
+            setBackground(EArray, '000', true)
+            setBackground('textfield', '171515', false)
+            setBackground(another_array, '000', true)
+            setForeground(another_array, 'BFFFBC', true)
+            setForeground('textfield', 'BFFFBC', false)
+            another_array.forEach(element => {
+                document.getElementById(element).style.border = "1px solid rgba(255, 255, 255, 0.15)";
+            });
+            localStorage.setItem('darkModeEnabled', '0')
+        } else if (localStorage.getItem('darkModeEnabled') === '0') {
+            setBackground(EArray, colorPalette['Blue-Black'], true)
+            setBackground('textfield', 'fff', false)
+            setForeground('textfield', colorPalette['Blue-Black'], false)
+            setBackground(another_array, 'fff', true)
+            setForeground(another_array, colorPalette['Blue-Black'], true)
+            another_array.forEach(element => {
+                document.getElementById(element).style.border = "1px solid rgba(0, 0, 0, 0.15)";
+            });
+            localStorage.setItem('darkModeEnabled', '1')
+        }
     }
     render() {
         return (

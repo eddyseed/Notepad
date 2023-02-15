@@ -34,7 +34,12 @@ export default class File extends Component {
         }
     }
     saveFile = () => {
-        localStorage.setItem(String(document.getElementById('fileName').innerHTML), String(document.getElementById('textfield').value))
+        if (String(document.getElementById('fileName').innerHTML) === 'untitled') {
+            let FILENAME = prompt("What name do you want to give your file?")
+            document.getElementById('fileName').innerHTML = typeof FILENAME
+            localStorage.setItem(FILENAME, document.getElementById('textfield').value)
+            document.title = document.getElementById('fileName').innerHTML
+        }
     }
     discardFile = () => {
         let fileTitle = document.getElementById('fileName')

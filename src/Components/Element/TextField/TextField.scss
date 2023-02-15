@@ -1,7 +1,12 @@
-#textfieldWrapper{
+#textfieldWrapper {
     display: grid;
     grid-template-rows: 15fr 1fr;
-    #textfield::selection{
-        background-color: #bfffbc;
+
+    #textfield {
+        transition: .3s linear;
+
+        &::selection {
+            background-color: #bfffbc;
+        }
     }
 }

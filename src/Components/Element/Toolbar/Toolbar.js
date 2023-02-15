@@ -55,7 +55,7 @@ export default class Toolbar extends Component {
     return (
       <div className={`${this.props.hidden?'hidden':'grid'} grid-rows-2 select-none`} id={`${this.props.eID}`}>
         <section>
-          <ul className={`fileMenu flex space-x-4 w-full px-10 items-center h-full font-[500] menu-items bg-[#${this.props.backgroundColor}] outline-none text-[#${this.props.foregroundColor}]`}>
+          <ul className={`fileMenu flex space-x-4 w-full px-10 items-center h-full font-[500] menu-items bg-[#${this.props.backgroundColor}] outline-none text-[#${this.props.foregroundColor}]`} id={`menuBar`}>
             <li onMouseEnter={this.showFileMenu}>File&nbsp;<i className="fa-solid fa-caret-down"></i></li>
             <li onMouseEnter={this.editFileMenu}>Edit&nbsp;<i className="fa-solid fa-caret-down"></i></li>
             <li onMouseEnter={this.formatFileMenu}>Format&nbsp;<i className="fa-solid fa-caret-down"></i></li>
@@ -65,7 +65,7 @@ export default class Toolbar extends Component {
         </section>
         <File x={8} y={12} eID={'fileDropDown'} hidden={true}/>
         <Edit x={36} y={12} eID={'editDropDown'} hidden={true}/>
-        <Format x={56} y={0} eID={'formatDropDown'} hidden={false}/>
+        <Format x={56} y={12} eID={'formatDropDown'} hidden={true}/>
 
         <section className={`flex h-full items-end justify-center text-[#${this.props.foregroundColor}] bg-[#${this.props.backgroundColor}]`} onMouseEnter={this.quickToolBarClicked} id='quickToolBar'>
           <section className='text-2xl space-x-6 w-11/12 h-full flex items-center'>

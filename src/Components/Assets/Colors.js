@@ -5,19 +5,21 @@ export const colorPalette = {
     "Blue-Black": "070C20"
 }
 let setBackground = (eID, bg, bool) => {
-    console.log()
-    console.log(bg, typeof bg)
     if (bool) {
         eID.forEach(element => {
-            document.getElementById(element).setAttribute('style', `backgroundColor: #${bg}`)
+            document.getElementById(element).style.backgroundColor = `#${bg}`
         });
+    }else if(!bool){
+        document.getElementById(eID).style.backgroundColor = `#${bg}`
     }
 }
 let setForeground = (eID, color, bool) => {
     if (bool) {
-        for (let index = 0; index < eID.length; index++) {
-            document.getElementById(eID).style.color(`#${color}`)
-        }
+        eID.forEach(element => {
+            document.getElementById(element).style.color = `#${color}`
+        });
+    }else if(!bool){
+        document.getElementById(eID).style.color = `#${color}`
     }
 }
 export { setBackground, setForeground };
