@@ -28,18 +28,27 @@ export default class Edit extends Component {
         document.getElementById('textfield').select()
         document.getElementById('editDropDown').classList.add('hidden')
     }
-    insertTimeCommand=()=>{
+    insertTimeCommand = () => {
+        const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+        var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        var mS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
         let date = new Date()
-        const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-        let text = String(date.getDate()+"th of "+month[date.getMonth()])
+        let hour = date.getHours()
+        let min = date.getMinutes()
+        let day = date.getDay()
+        let dAte = date.getDate()
+        let month = date.getMonth()
+        let year = date.getFullYear()
+        let text = hour.toString() + ":" + min.toString() + ", " + weekdays[day] + " " + dAte.toString()+"th of "+mS[month]+" "+year.toString()
+            console.log(text)
         document.getElementById('textfield').value += text
     }
-    featureNotWorking=()=>{
+    featureNotWorking = () => {
         alert("Find and Replace features are not working yet!")
     }
     render() {
         return (
-            <div className={`space-y-4 top-${this.props.y} left-${this.props.x} ${this.props.hidden?'hidden':''}`} id={`${this.props.eID}`}>
+            <div className={`space-y-4 top-${this.props.y} left-${this.props.x} ${this.props.hidden ? 'hidden' : ''}`} id={`${this.props.eID}`}>
                 <ul className='sector space-y-1'>
                     <ul className='space-x-4' onClick={this.execCutCommand}>
                         <li><i className="fa-solid fa-cut"></i><span>Cut</span></li>

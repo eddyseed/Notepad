@@ -10,35 +10,45 @@ export default class File extends Component {
     static defaultProps = {
         hidden: false
     }
-
+    componentDidMount() {
+        window.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key.toLowerCase() === 's') {
+                e.preventDefault();
+                this.saveFile()
+            } else if (e.altKey && e.key.toLowerCase() === 'n') {
+                e.preventDefault()
+                this.loadNewFileDialog()
+            } else if (e.ctrlKey && e.key.toLocaleLowerCase() === 'o') {
+                e.preventDefault()
+                this.openExistingFile();
+            }else if(e.altKey && e.key.toLowerCase()==='d'){
+                e.preventDefault()
+                this.discardFile()
+            }
+        })
+    }
     loadNewFileDialog = () => {
         document.getElementById('mainElements').style.opacity = 0.9
         document.getElementById('newFileDialog').classList.remove('hidden')
         document.getElementById('newFileDialog').classList.add('flex')
         document.getElementById('fileDropDown').classList.add('hidden')
-        document.getElementById('textfield').value = ''
     }
     openExistingFile = () => {
-        let fileName = prompt("Enter file name you want to open")
-        try {
-            if (Boolean(localStorage[fileName])) {
-                document.getElementById('textfield').value = localStorage.getItem(String(fileName))
-                document.getElementById('fileDropDown').classList.add('hidden')
-                document.getElementById('fileName').innerHTML = fileName
-            } else {
-                alert("File Not Found!")
+        document.getElementById('mainElements').style.opacity = 0.9
+        document.getElementById('openFileDialog').classList.remove('hidden')
+        document.getElementById('openFileDialog').classList.add('flex')
+        document.getElementById('fileDropDown').classList.add('hidden')
 
-            }
-        } catch (err) {
-            console.log("Error", err)
-        }
     }
     saveFile = () => {
         if (String(document.getElementById('fileName').innerHTML) === 'untitled') {
-            let FILENAME = prompt("What name do you want to give your file?")
-            document.getElementById('fileName').innerHTML = typeof FILENAME
-            localStorage.setItem(FILENAME, document.getElementById('textfield').value)
-            document.title = document.getElementById('fileName').innerHTML
+            document.getElementById('mainElements').style.opacity = 0.9
+            document.getElementById('saveFileDialog').classList.remove('hidden')
+            document.getElementById('saveFileDialog').classList.add('flex')
+            document.getElementById('fileDropDown').classList.add('hidden')
+
+        } else {
+            localStorage.setItem(document.getElementById('fileName').innerHTML, document.getElementById('textfield').value)
         }
     }
     discardFile = () => {
@@ -49,6 +59,7 @@ export default class File extends Component {
         document.getElementById('newFileDialog').classList.add('hidden');
         document.getElementById('fileDropDown').classList.add('hidden')
         document.getElementById('textfield').value = ''
+
     }
     render() {
         return (

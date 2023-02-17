@@ -4,11 +4,21 @@ import shortcuts from '../../../../Assets/Shortcuts'
 import { colorPalette, setBackground, setForeground } from '../../../../Assets/Colors'
 export default class Format extends Component {
     componentDidMount() {
+        window.addEventListener('keydown', (e) => {
+            if (e.altKey && e.shiftKey && e.key.toLowerCase() === 'w') {
+                e.preventDefault()
+                this.toggleWordWrap()
+            }else if(e.altKey && e.key.toLowerCase()==='p'){
+                e.preventDefault()
+                this.toggleDarkMode()
+            }
+        })
         localStorage.setItem('darkModeEnabled', '0')
         const EArray = [
             'statusbar',
             'menuBar',
             'quickToolBar',
+            'newFileInnerWin'
         ]
 
         const another_array = [
@@ -56,7 +66,7 @@ export default class Format extends Component {
             'statusbar',
             'menuBar',
             'quickToolBar',
-
+            'newFileInnerWin'
         ]
         const another_array = [
             'fileDropDown',
