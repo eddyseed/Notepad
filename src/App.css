@@ -6,6 +6,17 @@
   box-sizing: border-box;
 }
 
+main#parent_wrapper {
+  height: 100vh !important;
+}
+main#parent_wrapper > section#mainElements {
+  display: grid;
+}
+
+#toolBar, #textfield, #statusbar, #fileDropDown, #editDropDown, #formatDropDown {
+  transition: cubic-bezier(1, 0, 0, 1);
+}
+
 .ss-3 {
   font-family: "Source Sans 3";
 }
@@ -31,6 +42,6 @@ main#parent_wrapper > section {
 }
 
 .btn {
-  background: #bfffbc;
+  background: #A6B1E1;
   color: #080302;
 }/*# sourceMappingURL=App.css.map */

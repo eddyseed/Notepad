@@ -1,24 +1,33 @@
+//React Elements
 import React, { Component } from 'react'
-import { colorPalette } from './Components/Assets/Colors'
+
+//Stylesheet Imports
+import './App.css'
+
+//Custom Elements Imports
 import TextField from './Components/Element/TextField/TextField'
 import Toolbar from './Components/Element/Toolbar/Toolbar'
-import './App.css'
-import NewFileDialog from './Components/Element/Toolbar/Dropdowns/File/NewFile/NewFileDialog'
+import NewFile from './Components/Element/Toolbar/Dropdowns/File/NewFile/NewFile'
 import SaveFile from './Components/Element/Toolbar/Dropdowns/File/SaveFile/SaveFile'
 import OpenFile from './Components/Element/Toolbar/Dropdowns/File/OpenFile/OpenFile'
+
 export default class App extends Component {
   render() {
     return (
-      <main id='parent_wrapper' className='h-screen'>
-        <section className='grid' id='mainElements'>
-          <Toolbar hidden={false} backgroundColor={colorPalette['Blue-Black']} foregroundColor={colorPalette['Snow']} eID="toolBar"/>
-          <TextField backgroundColor={colorPalette['Snow']} foregroundColor={colorPalette['Blue-Black']} eID="textfieldWrapper"/>
+      <main id='parent_wrapper'>
+
+        {/*Static Elements  */}
+        <section id='mainElements'>
+          <Toolbar hidden={false} eID="toolBar" />
+          <TextField eID="textfieldWrapper" />
         </section>
-        <NewFileDialog backgroundColor={`000`} hidden={true} title="Create New File"/>
-        <SaveFile backgroundColor={'000'} hidden={true} title="Give your file a title"/>
-        <OpenFile backgroundColor={'000'} hidden={true} title="Enter the title of the file"/>
+
+        {/* Floating Elements */}
+        <NewFile hidden={true} title="Create New File" />
+        <OpenFile hidden={false} title="Choose the File" />
+        <SaveFile hidden={true} title="Give your file a title" />
+
       </main>
     )
   }
 }
-// To design the Toolbar ->

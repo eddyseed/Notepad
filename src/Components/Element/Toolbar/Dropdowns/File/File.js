@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import shortcuts from '../../../../Assets/Shortcuts'
+let date = new Date();
 export default class File extends Component {
     static propTypes = {
         hidden: PropTypes.bool,
@@ -10,56 +11,42 @@ export default class File extends Component {
     static defaultProps = {
         hidden: false
     }
+    constructor(){
+        super();
+        this.state={
+            defaultFile: 'untitled',
+            defaultDate: 'unknown'
+        }
+    }
     componentDidMount() {
         window.addEventListener('keydown', (e) => {
             if (e.ctrlKey && e.key.toLowerCase() === 's') {
                 e.preventDefault();
-                this.saveFile()
+                this.loadSaveFileDialog()
             } else if (e.altKey && e.key.toLowerCase() === 'n') {
                 e.preventDefault()
                 this.loadNewFileDialog()
             } else if (e.ctrlKey && e.key.toLocaleLowerCase() === 'o') {
                 e.preventDefault()
-                this.openExistingFile();
-            }else if(e.altKey && e.key.toLowerCase()==='d'){
+                this.loadOpenFileDialog();
+            } else if (e.altKey && e.key.toLowerCase() === 'd') {
                 e.preventDefault()
                 this.discardFile()
             }
         })
     }
     loadNewFileDialog = () => {
-        document.getElementById('mainElements').style.opacity = 0.9
-        document.getElementById('newFileDialog').classList.remove('hidden')
-        document.getElementById('newFileDialog').classList.add('flex')
-        document.getElementById('fileDropDown').classList.add('hidden')
+        document.getElementById('newFileDialog').style.display = 'flex'
     }
-    openExistingFile = () => {
-        document.getElementById('mainElements').style.opacity = 0.9
-        document.getElementById('openFileDialog').classList.remove('hidden')
-        document.getElementById('openFileDialog').classList.add('flex')
-        document.getElementById('fileDropDown').classList.add('hidden')
-
+    loadOpenFileDialog = () => {
+        document.getElementById('openFileDialog').style.display = 'flex'
     }
-    saveFile = () => {
-        if (String(document.getElementById('fileName').innerHTML) === 'untitled') {
-            document.getElementById('mainElements').style.opacity = 0.9
-            document.getElementById('saveFileDialog').classList.remove('hidden')
-            document.getElementById('saveFileDialog').classList.add('flex')
-            document.getElementById('fileDropDown').classList.add('hidden')
-
-        } else {
-            localStorage.setItem(document.getElementById('fileName').innerHTML, document.getElementById('textfield').value)
-        }
+    loadSaveFileDialog = () => {
+        document.getElementById('openFileDialog').style.display = 'flex'
     }
-    discardFile = () => {
-        let fileTitle = document.getElementById('fileName')
-        localStorage.removeItem(String(fileTitle.innerHTML))
-        fileTitle.innerHTML = 'untitled'
-        document.getElementById('newFileDialog').classList.remove('flex');
-        document.getElementById('newFileDialog').classList.add('hidden');
-        document.getElementById('fileDropDown').classList.add('hidden')
-        document.getElementById('textfield').value = ''
-
+    discardCurrentFile=()=>{
+        document.getElementById('fileName').innerHTML = this.state.defaultFile
+        document.getElementById('lastSavedDate').innerHTML = this.state.defaultDate
     }
     render() {
         return (
@@ -69,11 +56,11 @@ export default class File extends Component {
                         <li><i className="fa-solid fa-plus"></i><span>New</span></li>
                         <li>{shortcuts.new}</li>
                     </ul>
-                    <ul onClick={this.openExistingFile}>
+                    <ul onClick={this.loadOpenFileDialog}>
                         <li><i className="fa-regular fa-file"></i><span>Open</span></li>
                         <li>{shortcuts.open}</li>
                     </ul>
-                    <ul onClick={this.saveFile}>
+                    <ul onClick={this.loadSaveFileDialog}>
                         <li><i className="fa-regular fa-save"></i><span>Save</span></li>
                         <li>{shortcuts.save}</li>
                     </ul>
@@ -84,7 +71,7 @@ export default class File extends Component {
                         <li><i className="fa-solid fa-print"></i><span>Print</span></li>
                         <li>{shortcuts.print}</li>
                     </ul>
-                    <ul className='discard-menu-option' onClick={this.discardFile}>
+                    <ul className='discard-menu-option' onClick={this.discardCurrentFile}>
                         <li><i className="fa-regular fa-trash-can"></i><span>Discard</span></li>
                         <li>{shortcuts.discard}</li>
                     </ul>

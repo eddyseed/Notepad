@@ -1,55 +1,65 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 export default class OpenFile extends Component {
+    constructor() {
+        super();
+        this.state = {
+            fileSelected: ""
+        }
+    }
     static propTypes = {
-        backgroundColor: PropTypes.string,
-        foregroundColor: PropTypes.string,
         hidden: PropTypes.bool,
         eID: PropTypes.string,
         title: PropTypes.string
     }
     static defaultProps = {
-        backgroundColor: "070C20",
-        foregroundColor: "fbf5f3",
         hidden: false,
         title: "A basic window"
     }
-    openFileProcess = () => {
-        let fileName = document.getElementById('oFileNameField')
-        try {
-            if (Boolean(localStorage[fileName.value])) {
-                document.getElementById('textfield').value = localStorage.getItem(String(fileName.value))
-                document.getElementById('fileDropDown').classList.add('hidden')
-                document.getElementById('fileName').innerHTML = fileName.value
-                document.title = fileName.value
-            } else {
-                alert("File Not Found!")
-
-            }
-        } catch (err) {
-            console.log("Error", err)
-        }
+    closeDialog = () => {
+        document.getElementById('openFileDialog').style.display = 'none'
     }
-    closeOpenFileDialog=()=>{
-        document.getElementById('openFileDialog').classList.remove('flex')
-        document.getElementById('openFileDialog').classList.add('hidden')
-        document.getElementById('mainElements').style.opacity = 1
+    openTextFile = () => {
+
+    }
+    selectFile = (e) => {
+        document.getElementById(e.target.parentElement.id).style.backgroundColor = '#a6b1e16e'
+        let selectedFileIndex = Number(e.target.parentElement.id.replace('file_box_', ''))
+        let selectedFile = e.target.innerText
+        console.log(localStorage.key(selectedFileIndex - 1))
+        for (let i = 1; i < document.getElementById(e.target.parentElement.id).childElementCount; i++) {
+            if(i!==selectedFileIndex)
+            document.getElementById(`file_box_${i}`).style.background = 'initial'
+        }
     }
     render() {
         return (
-            <div className={`${this.props.hidden ? 'hidden' : ''} absolute top-0 w-screen h-screen items-center justify-center select-none animate__animated animate__slideInDown`} id='openFileDialog'>
-                <main className={`grid grid-flow-row h-[40vh] w-[40vw] rounded-xl border-x-style bg-[#${this.props.backgroundColor}] text-[#${this.props.foregroundColor}]`} style={{
-                    gridTemplateRows: "1fr 2fr 1fr"
-                }}>
+            <div className={`${this.props.hidden ? 'hidden' : ''} absolute top-0 w-screen h-screen items-center justify-center select-none animate__animated animate__backInLeft`} id='openFileDialog'>
+                <main className={`grid grid-flow-row h-[90vh] w-[40vw] rounded-xl`}>
                     <section className='flex font-semibold text-2xl items-end px-12'>
                         <header>{this.props.title}</header>
                     </section>
-                    <section className='flex justify-center'>
-                        <input type="text" id="oFileNameField" className='bg-[#171515] text-[#fbf5f3] h-2/5 w-10/12 rounded-md outline-none px-3 self-center ' placeholder='e.g. index.html' autoComplete='off' />
+                    <section className='flex'>
+                        <section className="mx-12 py-8 file_grid">
+                            <div className='file_box' id='file_box_1' onClick={this.selectFile}>
+                                <i className="fa-regular fa-file"></i>
+                                <span className='file_x'>open.txt</span>
+                                <i className="fa-regular fa-trash-can"></i>
+                            </div>
+                            <div className='file_box' id='file_box_2' onClick={this.selectFile}>
+                                <i className="fa-regular fa-file"></i>
+                                <span className='file_x'>open.txt</span>
+                                <i className="fa-regular fa-trash-can"></i>
+                            </div><div className='file_box' id='file_box_3' onClick={this.selectFile}>
+                                <i className="fa-regular fa-file"></i>
+                                <span className='file_x'>open.txt</span>
+                                <i className="fa-regular fa-trash-can"></i>
+                            </div>
+                        </section>
                     </section>
                     <section className='space-x-8 flex justify-end px-12 font-[500]'>
-                        <button className="btn px-8 py-2 rounded-3xl h-3/5" onClick={this.closeOpenFileDialog}>Cancel</button>
-                        <button className="btn px-8 py-2 rounded-3xl h-3/5" onClick={this.openFileProcess}>Create</button>
+                        <button className="btn px-8 py-2 rounded-md h-3/5" onClick={this.closeDialog}>Close</button>
+                        <button className="btn px-8 py-2 rounded-md h-3/5" onClick={this.openTextFile}>Open</button>
                     </section>
                 </main>
             </div>

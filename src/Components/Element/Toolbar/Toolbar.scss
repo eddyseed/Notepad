@@ -7,23 +7,15 @@
         }
     }
 
-    .menuBar,
-    .quickToolBar {
-        transition: .3s linear;
-    }
-
     #fileDropDown,
     #editDropDown,
     #formatDropDown {
         position: absolute;
         width: 20vw;
-        background: white;
         border-radius: 5px;
         padding-top: 0.5rem;
         padding-bottom: 0.5rem;
         border: 1px solid rgba(255, 255, 255, 0.15);
-        
-        transition: .3s linear;
     }
 
 }
@@ -44,6 +36,10 @@
         cursor: pointer;
         transition: .1s ease-in;
 
+        &:hover {
+            background-color: #a6b1e16e;
+        }
+
         &>li:first-child {
             display: grid;
             grid-template-columns: 1fr 3fr;
@@ -59,17 +55,49 @@
             align-self: center;
             font-size: 1.2rem;
         }
-
-        &:hover {
-            background-color: #0F193F;
-            color: #FBF5F3;
-        }
     }
 }
 
 .discard-menu-option {
     &:hover {
-        background-color: #C91106 !important;
-        color: white !important;
+        background-color: #ff0000ea !important;
+    }
+}
+
+#newFileDialog,
+#openFileDialog,
+#saveFileDialog {
+    &>main {
+        grid-template-rows: 1.5fr 8fr 1.4fr;
+    }
+}
+
+.file_grid {
+    grid-template-rows: repeat(8, 1fr);
+    display: grid;
+    width: 100%;
+    
+    .file_box {
+        display: grid;
+        grid-auto-flow: column;
+        height: 100%;
+        grid-template-columns: 2fr 13fr 2fr;
+        transition: .2s ease-in;
+        border-radius: 0.375rem;
+        &:hover{
+            background-color: #a6b1e16e;
+        }
+        &>i{
+            color: #D6E5E3;
+            display: grid;
+            place-content: center;
+            font-size: 1.5rem;
+        }
+        &>span{
+            display: flex;
+            align-items: center;
+            margin: 0 1.5rem;
+            color: #D6E5E3;
+        }
     }
 }

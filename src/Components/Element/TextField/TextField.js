@@ -18,14 +18,15 @@ export default class TextField extends Component {
     this.state = {
       fieldText: "",
       "text-encoding": "UTF-8",
-      "currentFile": "untitled"
+      "currentFile": "untitled",
+      "lastSaved": "unknown "
     }
   }
   updateFieldText = (event) => {
-    this.setState = {
+    this.setState({
       fieldText: event.target.value,
       fieldLength: event.target.value.length
-    }
+    })
     document.getElementById('charCount').innerHTML = event.target.value.length
     if (Number(event.target.value) === 0) {
       document.getElementById('wordCount').innerHTML = 0
@@ -40,10 +41,11 @@ export default class TextField extends Component {
   }
   render() {
     return (
-      <div className={`w-full h-[99.99%] bg-[#${this.props.backgroundColor}] select-none`} id={`${this.props.eID}`}>
-        <textarea wrap='off' className={`ss-3 text-lg py-8 px-14 h-full outline-none resize-none bg-inherit text-[#${this.props.foregroundColor}]`} placeholder='Get your fingers on the keyboard...' onChange={this.updateFieldText} onMouseEnter={this.textFieldClicked} spellCheck='false' id='textfield'></textarea>
-        <footer className={`font-[500] bg-[#${this.props.foregroundColor}] border-x-style h-full text-[#BFFFBC]`} id='statusbar'>
+      <div className={`w-full h-[99.99%] select-none`} id={`${this.props.eID}`}>
+        <textarea wrap='off' className={`ss-3 text-lg py-8 px-14 h-full outline-none resize-none bg-inherit`} placeholder='Get your fingers on the keyboard...' onChange={this.updateFieldText} onMouseEnter={this.textFieldClicked} spellCheck='false' id='textfield'></textarea>
+        <footer className={`font-[500] border-x-style h-full`} id='statusbar'>
           <section className='w-full h-full flex items-center justify-end px-14 space-x-8'>
+            <span>Last Saved:&nbsp;<span id='lastSavedDate'>{this.state.lastSaved}</span></span>
             <span>File:&nbsp;<span id='fileName'>{this.state.currentFile}</span></span>
             <span onClick={this.checkText} className='self-center'>{this.state['text-encoding']}</span>
             <span>Chars:&nbsp;<span id='charCount'>{0}</span></span>

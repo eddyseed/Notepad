@@ -2,12 +2,9 @@
   display: grid;
   grid-template-rows: 15fr 1fr;
 }
-#textfieldWrapper #textfield {
-  transition: 0.3s linear;
-}
 #textfieldWrapper #textfield::-moz-selection {
-  background-color: #bfffbc;
+  background-color: rgba(166, 177, 225, 0.431372549);
 }
 #textfieldWrapper #textfield::selection {
-  background-color: #bfffbc;
+  background-color: rgba(166, 177, 225, 0.431372549);
 }/*# sourceMappingURL=TextField.css.map */

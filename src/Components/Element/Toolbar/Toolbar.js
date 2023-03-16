@@ -51,6 +51,14 @@ export default class Toolbar extends Component {
     document.getElementById('editDropDown').classList.add('hidden')
     document.getElementById('formatDropDown').classList.add('hidden')
   }
+  changeCurrentFileName = (e) => {
+    document.getElementById('currentFileName').contentEditable = true
+    document.getElementById(e.target.id).addEventListener('keydown', (f) => {
+      if (f.key === 'Enter') {
+        document.title = document.getElementById(e.target.id).innerHTML
+      }
+    })
+  }
   emptyTextField = () => {
     document.getElementById('textfield').value = ''
   }
@@ -58,7 +66,7 @@ export default class Toolbar extends Component {
     return (
       <div className={`${this.props.hidden ? 'hidden' : 'grid'} grid-rows-2 select-none`} id={`${this.props.eID}`}>
         <section>
-          <ul className={`fileMenu flex space-x-4 w-full px-10 items-center h-full font-[500] menu-items bg-[#${this.props.backgroundColor}] outline-none text-[#${this.props.foregroundColor}]`} id={`menuBar`}>
+          <ul className={`fileMenu flex space-x-4 w-full px-10 items-center h-full font-[500] menu-items outline-none`} id={`menuBar`}>
             <li onMouseEnter={this.showFileMenu}>File&nbsp;<i className="fa-solid fa-caret-down"></i></li>
             <li onMouseEnter={this.editFileMenu}>Edit&nbsp;<i className="fa-solid fa-caret-down"></i></li>
             <li onMouseEnter={this.formatFileMenu}>Format&nbsp;<i className="fa-solid fa-caret-down"></i></li>
@@ -68,7 +76,7 @@ export default class Toolbar extends Component {
         <Edit x={36} y={12} eID={'editDropDown'} hidden={true} />
         <Format x={56} y={12} eID={'formatDropDown'} hidden={true} />
 
-        <section className={`flex h-full items-end justify-center text-[#${this.props.foregroundColor}] bg-[#${this.props.backgroundColor}]`} onMouseEnter={this.quickToolBarClicked} id='quickToolBar'>
+        <section className={`flex h-full justify-center`} onMouseEnter={this.quickToolBarClicked} id='quickToolBar'>
           <section className='text-2xl space-x-6 w-11/12 h-full flex items-center'>
             <button onClick={this.execCutCommand} title='Ctrl + X'><span><i className="fa-solid fa-scissors"></i></span></button>
             <button onClick={this.execCopyCommand} title='Ctrl + C'><span><i className="fa-regular fa-copy"></i></span></button>
@@ -76,7 +84,7 @@ export default class Toolbar extends Component {
             <button><span><span></span></span></button>
             <button className='cursor-default'><span><span >|</span></span></button>
             <button onClick={this.emptyTextField}><i className="fa-solid fa-rotate-right"></i></button>
-            <a href="https://github.com/rishabhjms/Notepad/" target={'_blank'} rel="noreferrer"> <button><i class="fa-regular fa-circle-question"></i></button></a>
+            <a href="https://github.com/rishabhjms/Notepad/" target={'_blank'} rel="noreferrer"> <button><i className="fa-regular fa-circle-question"></i></button></a>
           </section>
         </section>
       </div>

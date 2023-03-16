@@ -3,10 +3,8 @@
     grid-template-rows: 15fr 1fr;
 
     #textfield {
-        transition: .3s linear;
-
         &::selection {
-            background-color: #bfffbc;
+            background-color: #a6b1e16e;
         }
     }
 }

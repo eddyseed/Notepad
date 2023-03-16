@@ -1,99 +1,76 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import shortcuts from '../../../../Assets/Shortcuts'
-import { colorPalette, setBackground, setForeground } from '../../../../Assets/Colors'
-export default class Format extends Component {
-    componentDidMount() {
-        window.addEventListener('keydown', (e) => {
-            if (e.altKey && e.shiftKey && e.key.toLowerCase() === 'w') {
-                e.preventDefault()
-                this.toggleWordWrap()
-            }else if(e.altKey && e.key.toLowerCase()==='p'){
-                e.preventDefault()
-                this.toggleDarkMode()
-            }
-        })
-        localStorage.setItem('darkModeEnabled', '0')
-        const EArray = [
-            'statusbar',
-            'menuBar',
-            'quickToolBar',
-            'newFileInnerWin'
-        ]
 
-        const another_array = [
-            'fileDropDown',
-            'editDropDown',
-            'formatDropDown'
-        ]
-        if (localStorage.getItem('darkModeEnabled') === '0') {
-            setBackground(EArray, '000', true)
-            setBackground('textfield', '171515', false)
-            setBackground(another_array, '000', true)
-            setForeground(another_array, 'BFFFBC', true)
-            setForeground('textfield', 'BFFFBC', false)
-            another_array.forEach(element => {
-                document.getElementById(element).style.border = "1px solid rgba(255, 255, 255, 0.15)";
-            });
+const colorPalette = {
+    primary: "D6E5E3", //Light Color
+    secondary: "000411", // Dark Color
+    tertiary: "A6B1E1",
+    raisinBlack: "242124"
+}
+export default class Format extends Component {
+    constructor() {
+        super();
+        this.state = {
+            darkModeEnabled: true,
+            staticElements: ['toolBar', 'statusbar'],
+            menuDropDowns: ['fileDropDown', 'editDropDown', 'formatDropDown'],
+            floatingElements: ['newFileDialog', 'saveFileDialog', 'openFileDialog'],
+            fileNameFields: ['nFileNameField', 'sFileNameField']
+        }
+    }
+    setDarkMode = () => {
+        this.state.staticElements.forEach(element => {
+            document.getElementById(element).style.backgroundColor = "#" + colorPalette.secondary
+            document.getElementById(element).style.color = "#" + colorPalette.primary
+            document.getElementById(element).style.border = "1px solid rgba(255, 255, 255, 0.176)"
+        });
+        this.state.menuDropDowns.forEach(element => {
+            document.getElementById(element).style.backgroundColor = "#" + colorPalette.secondary
+            document.getElementById(element).style.color = "#" + colorPalette.primary
+            document.getElementById(element).style.border = "1px solid rgba(255, 255, 255, 0.176)"
+        })
+        this.state.floatingElements.forEach(element => {
+            document.getElementById(element).children[0].setAttribute('style', `
+            background: #000;
+            color: #${colorPalette.primary};
+            border:1px solid rgba(255, 255, 255, 0.176);
+            `)
+        })
+        this.state.fileNameFields.forEach(element => {
+            document.getElementById(element).style.backgroundColor = "#" + colorPalette.raisinBlack
+        })
+        document.getElementById('textfield').style.backgroundColor = "#" + colorPalette.secondary
+        document.getElementById('textfield').style.color = "#" + colorPalette.primary
+        document.getElementById('textfield').style.border = "1px solid rgba(255, 255, 255, 0.176)"
+    }
+    setLightMode = () => {
+        this.state.staticElements.forEach(element => {
+            document.getElementById(element).style.backgroundColor = "#" + colorPalette.tertiary
+            document.getElementById(element).style.color = "#" + colorPalette.secondary
+            document.getElementById(element).style.border = "1px solid rgba(0, 0, 0, 0.176)"
+        });
+        this.state.menuDropDowns.forEach(element => {
+            document.getElementById(element).style.backgroundColor = "#" + colorPalette.primary
+            document.getElementById(element).style.color = "#" + colorPalette.secondary
+            document.getElementById(element).style.border = "1px solid rgba(0, 0, 0, 0.176)"
+        })
+        document.getElementById('textfield').style.backgroundColor = "#" + colorPalette.primary
+        document.getElementById('textfield').style.color = "#" + colorPalette.secondary
+    }
+    componentDidMount() {
+        this.state.darkModeEnabled ? this.setDarkMode(this.state.staticElements) : this.setLightMode(this.state.staticElements)
+    }
+    toggleMode = () => {
+        if (this.state.darkModeEnabled) {
+            this.setLightMode();
+            this.setState({
+                darkModeEnabled: false
+            })
         } else {
-            setBackground(EArray, colorPalette['Blue-Black'], true)
-            setBackground('textfield', 'fff', false)
-            setForeground('textfield', colorPalette['Blue-Black'], false)
-            setBackground(another_array, 'fff', true)
-            setForeground(another_array, colorPalette['Blue-Black'], true)
-            another_array.forEach(element => {
-                document.getElementById(element).style.border = "1px solid rgba(0, 0, 0, 0.15)";
-            });
-        }
-    }
-    static propTypes = {
-        hidden: PropTypes.bool,
-        x: PropTypes.number,
-        y: PropTypes.number
-    }
-    static defaultProps = {
-        hidden: false
-    }
-    toggleWordWrap = () => {
-        if (document.getElementById('textfield').getAttribute('wrap') === 'off')
-            document.getElementById('textfield').setAttribute('wrap', 'on')
-        else {
-            document.getElementById('textfield').setAttribute('wrap', 'off')
-        }
-    }
-    toggleDarkMode = () => {
-        const EArray = [
-            'statusbar',
-            'menuBar',
-            'quickToolBar',
-            'newFileInnerWin'
-        ]
-        const another_array = [
-            'fileDropDown',
-            'editDropDown',
-            'formatDropDown'
-        ]
-        if (localStorage.getItem('darkModeEnabled') === '1') {
-            console.log("Dark")
-            setBackground(EArray, '000', true)
-            setBackground('textfield', '171515', false)
-            setBackground(another_array, '000', true)
-            setForeground(another_array, 'BFFFBC', true)
-            setForeground('textfield', 'BFFFBC', false)
-            another_array.forEach(element => {
-                document.getElementById(element).style.border = "1px solid rgba(255, 255, 255, 0.15)";
-            });
-            localStorage.setItem('darkModeEnabled', '0')
-        } else if (localStorage.getItem('darkModeEnabled') === '0') {
-            setBackground(EArray, colorPalette['Blue-Black'], true)
-            setBackground('textfield', 'fff', false)
-            setForeground('textfield', colorPalette['Blue-Black'], false)
-            setBackground(another_array, 'fff', true)
-            setForeground(another_array, colorPalette['Blue-Black'], true)
-            another_array.forEach(element => {
-                document.getElementById(element).style.border = "1px solid rgba(0, 0, 0, 0.15)";
-            });
-            localStorage.setItem('darkModeEnabled', '1')
+            this.setDarkMode();
+            this.setState({
+                darkModeEnabled: true
+            })
         }
     }
     render() {
@@ -103,7 +80,7 @@ export default class Format extends Component {
                     <ul className='space-x-4' onClick={this.toggleWordWrap}><li><i className="fa-solid fa-cut"></i><span>Word Wrap</span></li><li>{shortcuts.wordwrap}</li></ul>
                 </ul>
                 <ul> <li className='flex items-center justify-center'><hr className='w-[80%]' /></li></ul>
-                <ul className='sector space-y-1' onClick={this.toggleDarkMode}>
+                <ul className='sector space-y-1' onClick={this.toggleMode}>
                     <ul className='space-x-4'><li><i className="fa-regular fa-eye"></i><span>Dark Mode</span></li><li>{shortcuts.toggleMode}</li></ul>
                 </ul>
             </div>
