@@ -1,16 +1,15 @@
+//React Node Elements
 import React, { Component } from 'react'
-import './TextField.css'
 import PropTypes from 'prop-types'
+
+//Custom Imports
+import './TextField.css'
 export default class TextField extends Component {
   static propTypes = {
-    backgroundColor: PropTypes.string,
-    foregroundColor: PropTypes.string,
     hidden: PropTypes.bool,
     eID: PropTypes.string
   }
   static defaultProps = {
-    backgroundColor: "070C20",
-    foregroundColor: "fbf5f3",
     hidden: false
   }
   constructor() {
@@ -19,20 +18,23 @@ export default class TextField extends Component {
       fieldText: "",
       "text-encoding": "UTF-8",
       "currentFile": "untitled",
-      "lastSaved": "unknown "
+      "lastSaved": "unknown"
     }
   }
   updateFieldText = (event) => {
+    let updateTextInfo = () => {
+      document.getElementById('charCount').innerHTML = event.target.value.length
+      if (Number(event.target.value) === 0) {
+        document.getElementById('wordCount').innerHTML = 0
+      } else {
+        document.getElementById('wordCount').innerHTML = event.target.value.split(" ").length
+      }
+    }
     this.setState({
       fieldText: event.target.value,
       fieldLength: event.target.value.length
     })
-    document.getElementById('charCount').innerHTML = event.target.value.length
-    if (Number(event.target.value) === 0) {
-      document.getElementById('wordCount').innerHTML = 0
-    } else {
-      document.getElementById('wordCount').innerHTML = event.target.value.split(" ").length
-    }
+    this.updateFieldText()
   }
   textFieldClicked = () => {
     document.getElementById('fileDropDown').classList.add('hidden')
@@ -42,7 +44,7 @@ export default class TextField extends Component {
   render() {
     return (
       <div className={`w-full h-[99.99%] select-none`} id={`${this.props.eID}`}>
-        <textarea wrap='off' className={`ss-3 text-lg py-8 px-14 h-full outline-none resize-none bg-inherit`} placeholder='Get your fingers on the keyboard...' onChange={this.updateFieldText} onMouseEnter={this.textFieldClicked} spellCheck='false' id='textfield'></textarea>
+        <textarea wrap='off' className={`ss-3 text-lg py-8 px-14 h-full outline-none resize-none bg-inherit`} placeholder='Get your fingers on the keyboard...' onChange={this.updateFieldText} onMouseEnter={this.textFieldClicked} spellCheck='true' id='textfield'></textarea>
         <footer className={`font-[500] border-x-style h-full`} id='statusbar'>
           <section className='w-full h-full flex items-center justify-end px-14 space-x-8'>
             <span>Last Saved:&nbsp;<span id='lastSavedDate'>{this.state.lastSaved}</span></span>

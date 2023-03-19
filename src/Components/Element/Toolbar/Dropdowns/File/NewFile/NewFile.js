@@ -1,3 +1,4 @@
+// React Node Elements
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 export default class NewFileDialog extends Component {
@@ -5,15 +6,10 @@ export default class NewFileDialog extends Component {
         hidden: PropTypes.bool,
         eID: PropTypes.string,
         title: PropTypes.string
-    }
-    closeDialog = () => {
-        document.getElementById('newFileDialog').style.display = 'none'
-    }
-    formalities=(a)=>{
-        let date = new Date();
-        document.getElementById('fileName').innerHTML = a;
-        document.getElementById('lastSavedDate').innerHTML = date.getHours().toString()+":"+date.getMinutes().toString();
-        document.title = `${a} | VNote`
+    }    
+    static defaultProps = {
+        hidden: true,
+        title: "A basic window"
     }
     createTextFile = () => {
         let filename = document.getElementById('nFileNameField').value;
@@ -21,12 +17,22 @@ export default class NewFileDialog extends Component {
             if (character === '.') {
                 filename = ''
                 alert("Full stops not allowed! As it may create problems in saving file!")
+                localStorage.removeItem('.txt')
             } else {
                 localStorage.setItem(`${filename}.txt`, '')
-                this.formalities(filename+".txt")
+                this.formalities(filename + ".txt")
                 this.closeDialog()
             }
         })
+    }
+    formalities = (a) => {
+        let date = new Date();
+        document.getElementById('fileName').innerHTML = a;
+        document.getElementById('lastSavedDate').innerHTML = date.getHours().toString() + ":" + date.getMinutes().toString();
+        document.title = `${a} | VNote`
+    }
+    closeDialog = () => {
+        document.getElementById('newFileDialog').style.display = 'none'
     }
     render() {
         return (

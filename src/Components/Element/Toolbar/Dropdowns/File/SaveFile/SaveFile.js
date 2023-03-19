@@ -11,8 +11,19 @@ export default class SaveFile extends Component {
         hidden: false,
         title: "A basic window"
     }
-    closeDialog=()=>{
-        document.getElementById('newFileDialog').style.display = 'none'
+    saveCurrentFile = () => {
+        localStorage.setItem(document.getElementById('sFileNameField').value + '.txt', document.getElementById('textfield').value)
+        this.formalities(document.getElementById('sFileNameField').value + '.txt')
+        this.closeDialog()
+    }
+    formalities = (a) => {
+        let date = new Date();
+        document.getElementById('fileName').innerHTML = a;
+        document.getElementById('lastSavedDate').innerHTML = date.getHours().toString() + ":" + date.getMinutes().toString();
+        document.title = `${a} | VNote`
+    }
+    closeDialog = () => {
+        document.getElementById('saveFileDialog').style.display = 'none'
     }
     render() {
         return (
@@ -28,7 +39,7 @@ export default class SaveFile extends Component {
                     </section>
                     <section className='space-x-8 flex justify-end px-12 font-[500]'>
                         <button className="btn px-8 py-2 rounded-md h-3/5" onClick={this.closeDialog}>Cancel</button>
-                        <button className="btn px-8 py-2 rounded-md h-3/5" onClick={this.getFileName}>Create</button>
+                        <button className="btn px-8 py-2 rounded-md h-3/5" onClick={this.saveCurrentFile}>Create</button>
                     </section>
                 </main>
             </div>

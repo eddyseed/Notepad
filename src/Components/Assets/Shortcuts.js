@@ -8,7 +8,7 @@ const shortcuts = {
     "open": "Ctrl + 0",
     "selectall": "Ctrl + A",
     "wordwrap": "Alt + W",
-    "discard": "Shift + D",
-    "toggleMode": "Shift + N"
+    "discard": "Alt + D",
+    "toggleMode": "Alt + P"
 }
 export default shortcuts;

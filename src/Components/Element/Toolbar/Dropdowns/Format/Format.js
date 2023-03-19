@@ -1,4 +1,7 @@
+//React Node Elements
 import React, { Component } from 'react'
+
+//Custom Imports
 import shortcuts from '../../../../Assets/Shortcuts'
 
 const colorPalette = {
@@ -58,6 +61,12 @@ export default class Format extends Component {
         document.getElementById('textfield').style.color = "#" + colorPalette.secondary
     }
     componentDidMount() {
+        window.addEventListener('keydown', (e) => {
+            if (e.altKey && e.key.toLowerCase() === 'p') {
+                e.preventDefault()
+                this.toggleMode()
+            }
+        })
         this.state.darkModeEnabled ? this.setDarkMode(this.state.staticElements) : this.setLightMode(this.state.staticElements)
     }
     toggleMode = () => {

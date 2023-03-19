@@ -1,4 +1,4 @@
-//React Elements
+//React Node Elements
 import React, { Component } from 'react'
 
 //Stylesheet Imports
@@ -24,7 +24,7 @@ export default class App extends Component {
 
         {/* Floating Elements */}
         <NewFile hidden={true} title="Create New File" />
-        <OpenFile hidden={false} title="Choose the File" />
+        <OpenFile hidden={true} title="Choose the File" />
         <SaveFile hidden={true} title="Give your file a title" />
 
       </main>
