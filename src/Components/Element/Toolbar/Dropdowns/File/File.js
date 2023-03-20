@@ -51,10 +51,14 @@ export default class File extends Component {
         }
     }
     deleteFileFunc = () => {
-        let n = []
         for (let i = 0; i < document.getElementById('file_grid').childElementCount; i++) {
             document.getElementById(`trash_icn_${i}`).addEventListener('click', (e) => {
-                // To add event listener to delete icon in OpenFileDialog...
+                localStorage.removeItem(document.getElementById(`file_box_${i}`).firstElementChild.lastElementChild.innerHTML)
+                let node = document.getElementById(`file_box_${i}`);
+                if (node.parentNode) {
+                    node.parentNode.removeChild(node);
+                }
+
             })
         }
     }
@@ -66,11 +70,16 @@ export default class File extends Component {
         document.getElementById('file_grid').innerHTML = ''
         let pushBox = (file_box_index, _files) => {
             let box =
-                `<div class='file_box' id='file_box_${file_box_index}'>
+                `<section class="grid grid-flow-col" style="grid-template-columns: 6fr 1fr;" id="file_box_${file_box_index}">
+                <div class="file_box">
                 <i class="fa-regular fa-file"></i>
-                <span class='file_x'>${_files[file_box_index]}</span>
-                <i class="fa-regular fa-trash-can" id='trash_icn_${file_box_index}'></i>
-            </div>`
+                <span class="file_x">${_files[file_box_index]}</span>
+                </div>
+                <div class="flex items-center justify-center hover:bg-red-600 trash-wrapper" style="transition: .2s ease-in" id="trash_icn_${file_box_index}">                
+                <i class="fa-regular fa-trash-can text-2xl"></i>
+                </div>
+                </section>
+            `
             document.getElementById('file_grid').innerHTML += box
         }
         let files = []
@@ -83,6 +92,7 @@ export default class File extends Component {
             }
         }
         this.selectFileFunc()
+        this.deleteFileFunc()
     }
     loadSaveFileDialog = () => {
         if (document.getElementById('fileName').innerHTML === 'untitled') {
