@@ -5,10 +5,12 @@ import React, { Component } from 'react'
 import shortcuts from '../../../../Assets/Shortcuts'
 
 const colorPalette = {
-    primary: "D6E5E3", //Light Color
-    secondary: "000411", // Dark Color
+    primary: "FBFFFE", //Light Color
+    secondary: "000", // Dark Color
     tertiary: "A6B1E1",
-    raisinBlack: "242124"
+    azureWebWhite: "E6FAFC",
+    raisinBlack: "242124",
+
 }
 export default class Format extends Component {
     constructor() {
@@ -21,11 +23,20 @@ export default class Format extends Component {
             fileNameFields: ['nFileNameField', 'sFileNameField']
         }
     }
+    componentDidMount() {
+        window.addEventListener('keydown', (e) => {
+            if (e.altKey && e.key.toLowerCase() === 'p') {
+                e.preventDefault()
+                this.toggleMode()
+            }
+        })
+        this.state.darkModeEnabled ? this.setDarkMode(this.state.staticElements) : this.setLightMode(this.state.staticElements)
+    }
     setDarkMode = () => {
         this.state.staticElements.forEach(element => {
             document.getElementById(element).style.backgroundColor = "#" + colorPalette.secondary
             document.getElementById(element).style.color = "#" + colorPalette.primary
-            document.getElementById(element).style.border = "1px solid rgba(255, 255, 255, 0.176)"
+            // document.getElementById(element).style.border = "1px solid rgba(255, 255, 255, 0.176)"
         });
         this.state.menuDropDowns.forEach(element => {
             document.getElementById(element).style.backgroundColor = "#" + colorPalette.secondary
@@ -44,7 +55,7 @@ export default class Format extends Component {
         })
         document.getElementById('textfield').style.backgroundColor = "#" + colorPalette.secondary
         document.getElementById('textfield').style.color = "#" + colorPalette.primary
-        document.getElementById('textfield').style.border = "1px solid rgba(255, 255, 255, 0.176)"
+        // document.getElementById('textfield').style.border = "1px solid rgba(255, 255, 255, 0.176)"
     }
     setLightMode = () => {
         this.state.staticElements.forEach(element => {
@@ -60,15 +71,6 @@ export default class Format extends Component {
         document.getElementById('textfield').style.backgroundColor = "#" + colorPalette.primary
         document.getElementById('textfield').style.color = "#" + colorPalette.secondary
     }
-    componentDidMount() {
-        window.addEventListener('keydown', (e) => {
-            if (e.altKey && e.key.toLowerCase() === 'p') {
-                e.preventDefault()
-                this.toggleMode()
-            }
-        })
-        this.state.darkModeEnabled ? this.setDarkMode(this.state.staticElements) : this.setLightMode(this.state.staticElements)
-    }
     toggleMode = () => {
         if (this.state.darkModeEnabled) {
             this.setLightMode();
@@ -82,11 +84,29 @@ export default class Format extends Component {
             })
         }
     }
+    toggleWordWrap = () => {
+        if (document.getElementById('textfield').getAttribute('wrap') === 'off')
+            document.getElementById('textfield').setAttribute('wrap', 'on')
+        else{
+            document.getElementById('textfield').setAttribute('wrap', 'off')
+        }
+    }
+    toggleSpellCheck=()=>{
+        if (document.getElementById('textfield').getAttribute('spellcheck') === 'true')
+            document.getElementById('textfield').setAttribute('spellcheck', 'false')
+        else{
+            document.getElementById('textfield').setAttribute('spellcheck', 'true')
+        }
+    }
+
     render() {
         return (
             <div className={`top-${this.props.y} left-${this.props.x} space-y-4 ${this.props.hidden ? 'hidden' : ''}`} id={`${this.props.eID}`}>
                 <ul className='sector space-y-1'>
                     <ul className='space-x-4' onClick={this.toggleWordWrap}><li><i className="fa-solid fa-cut"></i><span>Word Wrap</span></li><li>{shortcuts.wordwrap}</li></ul>
+                </ul>
+                <ul className='sector space-y-1' onClick={this.toggleSpellCheck}>
+                    <ul className='space-x-4'><li><i className="fa-solid fa-check"></i><span>SpellCheck</span></li><li></li></ul>
                 </ul>
                 <ul> <li className='flex items-center justify-center'><hr className='w-[80%]' /></li></ul>
                 <ul className='sector space-y-1' onClick={this.toggleMode}>

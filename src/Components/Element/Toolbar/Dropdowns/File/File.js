@@ -19,8 +19,8 @@ export default class File extends Component {
     constructor() {
         super();
         this.state = {
-            defaultFile: 'untitled',
-            defaultDate: 'unknown'
+            defaultFile: 'Untitled',
+            defaultDate: 'Unknown'
         }
     }
     componentDidMount() {
@@ -95,7 +95,7 @@ export default class File extends Component {
         this.deleteFileFunc()
     }
     loadSaveFileDialog = () => {
-        if (document.getElementById('fileName').innerHTML === 'untitled') {
+        if (document.getElementById('fileName').innerHTML === 'Untitled') {
             document.getElementById('saveFileDialog').style.display = 'flex'
         } else {
             let a = document.getElementById('fileName').innerHTML + ".txt"
@@ -120,7 +120,7 @@ export default class File extends Component {
                 }
             }
             localStorage.removeItem(files[files.length - 1])
-            this.formalities('untitled')
+            this.formalities('Untitled')
         }
         document.getElementById('fileName').innerHTML = this.state.defaultFile
         document.getElementById('lastSavedDate').innerHTML = this.state.defaultDate

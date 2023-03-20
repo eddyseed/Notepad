@@ -17,24 +17,21 @@ export default class TextField extends Component {
     this.state = {
       fieldText: "",
       "text-encoding": "UTF-8",
-      "currentFile": "untitled",
-      "lastSaved": "unknown"
+      "currentFile": "Untitled",
+      "lastSaved": "Unknown"
     }
   }
   updateFieldText = (event) => {
-    let updateTextInfo = () => {
-      document.getElementById('charCount').innerHTML = event.target.value.length
-      if (Number(event.target.value) === 0) {
-        document.getElementById('wordCount').innerHTML = 0
-      } else {
-        document.getElementById('wordCount').innerHTML = event.target.value.split(" ").length
-      }
-    }
     this.setState({
       fieldText: event.target.value,
       fieldLength: event.target.value.length
     })
-    this.updateFieldText()
+    document.getElementById('charCount').innerHTML = event.target.value.length
+    if (Number(event.target.value) === 0) {
+      document.getElementById('wordCount').innerHTML = 0
+    } else {
+      document.getElementById('wordCount').innerHTML = event.target.value.split(" ").length
+    }
   }
   textFieldClicked = () => {
     document.getElementById('fileDropDown').classList.add('hidden')
