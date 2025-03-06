@@ -1,1 +1,1 @@
-# Notepad is cool
+Notepad is a cool application.
